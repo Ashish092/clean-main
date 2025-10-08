@@ -28,7 +28,13 @@ const nextConfig: NextConfig = {
         permanent: true,
         destination: 'https://www.cleaningprofessionals.com.au/:path*',
       },
-      //Handle terms page variations
+      // Handle "Melbourne" location redirect to "Melbourne CBD"
+      {
+        source: '/locations/melbourne/',
+        destination: '/locations/melbourne-cbd/',
+        permanent: true,
+      },
+      // Handle terms page variations
       {
         source: '/terms',
         destination: '/terms-and-conditions',
@@ -50,45 +56,12 @@ const nextConfig: NextConfig = {
         destination: '/blogs/professional-end-of-lease-cleaning-melbourne',
         permanent: true,
       },
+      // Handle blog vs blogs redirects
       {
         source: '/blog/:slug',
         destination: '/blogs/:slug',
         permanent: true,
-      },
-      {
-        source: '/services/windows-cleaning/',
-        destination: '/services/window-cleaning/',
-        permanent: true,
-      },
-      
-      {
-        source: '/services/general-house-cleaning/',
-        destination: '/services/general-cleaning/',
-        permanent: true,
-      },
-      {
-        source: '/services/office-cleaning/',
-        destination: '/services/commercial-cleaning/',
-        permanent: true,
-      },
-      {
-        source: '/services/holiday-cleaning',
-        destination: '/services/move-in-cleaning/',
-        permanent: true,
-      },
-      // Handle query parameter redirects
-      {
-        source: '/:path*',
-        has: [
-          {
-            type: 'query',
-            key: 'url',
-            value: '(?<url>.*)',
-          },
-        ],
-        destination: '/:path*/:url',
-        permanent: true,
-      },
+      }
     ]
   },
   async rewrites() {
@@ -157,30 +130,8 @@ const nextConfig: NextConfig = {
   trailingSlash: true,
   // Enhanced image configuration
   images: {
-    domains: ['vzyscxgvpzsqbkzpvttk.supabase.co', 'www.cleaningprofessionals.com.au', 'cleaningprofessionals.com.au'],
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'vzyscxgvpzsqbkzpvttk.supabase.co',
-        port: '',
-        pathname: '/storage/v1/object/public/**',
-      },
-    ],
-    formats: ['image/webp', 'image/avif'],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    path: '/_next/image',
-    loader: 'default',
-    disableStaticImages: false,
-    minimumCacheTTL: 60,
-    dangerouslyAllowSVG: false,
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-  },
-  experimental: {
-    serverComponentsExternalPackages: [],
-    serverActions: {
-      bodySizeLimit: '2mb'
-    }
+    domains: ['www.cleaningprofessionals.com.au', 'cleaningprofessionals.com.au'],
+    formats: ['image/avif', 'image/webp'],
   }
 }
 
